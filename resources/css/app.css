@@ -47,6 +47,37 @@
         background: #fff;
     }
 
+    .cv-header {
+        background: #fff !important;
+        border-bottom: 1px solid #d1d5db;
+        color: #111827 !important;
+    }
+
+    .cv-header .cv-title {
+        color: #111827 !important;
+    }
+
+    .cv-header .cv-role {
+        color: #0369a1 !important;
+    }
+
+    .cv-header .cv-headline,
+    .cv-header .cv-contact {
+        color: #4b5563 !important;
+    }
+
+    .cv-header .cv-contact a {
+        color: inherit !important;
+    }
+
+    .cv-header .cv-contact svg {
+        color: #6b7280 !important;
+    }
+
+    .cv-header .cv-mark {
+        display: none;
+    }
+
     .print-flat {
         box-shadow: none !important;
         border: 0 !important;

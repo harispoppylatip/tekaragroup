@@ -22,18 +22,18 @@
 
         <article class="print-flat mt-6 overflow-hidden rounded-3xl border border-line bg-white shadow-sm">
             {{-- Kepala CV --}}
-            <header class="relative overflow-hidden bg-night px-6 py-10 text-white sm:px-10">
-                <x-logo-mark tone="light" class="pointer-events-none absolute -right-8 -bottom-14 w-64 opacity-[0.07]" />
+            <header class="cv-header relative overflow-hidden bg-night px-6 py-10 text-white sm:px-10">
+                <x-logo-mark tone="light" class="cv-mark pointer-events-none absolute -right-8 -bottom-14 w-64 opacity-[0.07]" />
                 <div class="relative flex flex-col gap-8 sm:flex-row sm:items-center">
                     <x-member-avatar :member="$member" class="size-28 shrink-0 rounded-2xl text-4xl ring-4 ring-white/10 sm:size-32" />
                     <div>
-                        <h1 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">{{ $member->name }}</h1>
-                        <p class="mt-2 text-lg font-medium text-brand-sky">{{ $member->role }}</p>
-                        <p class="mt-3 max-w-xl leading-relaxed text-white/70">{{ $member->headline }}</p>
+                        <h1 class="cv-title font-display text-3xl font-bold tracking-tight sm:text-4xl">{{ $member->name }}</h1>
+                        <p class="cv-role mt-2 text-lg font-medium text-brand-sky">{{ $member->role }}</p>
+                        <p class="cv-headline mt-3 max-w-xl leading-relaxed text-white/70">{{ $member->headline }}</p>
                     </div>
                 </div>
 
-                <ul class="relative mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/80">
+                <ul class="cv-contact relative mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/80">
                     @if ($member->location)
                         <li class="flex items-center gap-2"><x-icon name="map-pin" class="size-4 text-white/50" />{{ $member->location }}</li>
                     @endif
