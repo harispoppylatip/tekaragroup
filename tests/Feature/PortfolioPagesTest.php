@@ -32,6 +32,23 @@ class PortfolioPagesTest extends TestCase
         }
     }
 
+    public function test_seeded_members_use_the_current_team_profiles(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+
+        $this->assertSame([
+            'Hari Poppy Latip',
+            'Yusuf Sardani',
+            'Zaskia Nabila',
+            'Mufidah Kholilah Putri',
+        ], Member::query()->orderBy('sort_order')->pluck('name')->all());
+
+        $this->assertDatabaseMissing('members', ['name' => 'Rizky Pratama']);
+        $this->assertDatabaseMissing('members', ['name' => 'Nadia Putri']);
+        $this->assertDatabaseMissing('members', ['name' => 'Dimas Saputra']);
+        $this->assertDatabaseMissing('members', ['experiences->0->description' => 'Contoh isi. Tuliskan tanggung jawab dan hasil kerja di sini.']);
+    }
+
     public function test_member_cv_page_shows_experience_skills_and_projects(): void
     {
         $member = Member::factory()->create();

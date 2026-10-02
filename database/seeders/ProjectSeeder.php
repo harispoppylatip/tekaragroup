@@ -59,9 +59,9 @@ class ProjectSeeder extends Seeder
                 'sort_order' => 1,
                 'team' => [
                     'hari-poppy-latip' => 'Firmware ESP32, API, dan dashboard',
-                    'rizky-pratama' => 'Database dan laporan',
-                    'nadia-putri' => 'Desain antarmuka',
-                    'dimas-saputra' => 'Perakitan alat',
+                    'yusuf-sardani' => 'Administrasi dan dokumentasi',
+                    'zaskia-nabila' => 'Relasi klien dan pengembangan bisnis',
+                    'mufidah-kholilah-putri' => 'Manajemen proyek dan analisis sistem',
                 ],
             ],
             [
@@ -83,7 +83,7 @@ class ProjectSeeder extends Seeder
                 'sort_order' => 2,
                 'team' => [
                     'hari-poppy-latip' => 'Pengembangan penuh',
-                    'nadia-putri' => 'Desain tampilan',
+                    'zaskia-nabila' => 'Relasi klien dan pengembangan bisnis',
                 ],
             ],
             [
@@ -105,7 +105,7 @@ class ProjectSeeder extends Seeder
                 'sort_order' => 3,
                 'team' => [
                     'hari-poppy-latip' => 'Pengembangan penuh',
-                    'rizky-pratama' => 'Integrasi API',
+                    'mufidah-kholilah-putri' => 'Analisis sistem',
                 ],
             ],
             [
@@ -126,7 +126,7 @@ class ProjectSeeder extends Seeder
                 'sort_order' => 4,
                 'team' => [
                     'hari-poppy-latip' => 'Backend',
-                    'nadia-putri' => 'Frontend',
+                    'zaskia-nabila' => 'Relasi klien',
                 ],
             ],
             [
@@ -146,7 +146,7 @@ class ProjectSeeder extends Seeder
                 'is_featured' => false,
                 'sort_order' => 5,
                 'team' => [
-                    'dimas-saputra' => 'Rangkaian dan firmware',
+                    'mufidah-kholilah-putri' => 'Analisis sistem',
                     'hari-poppy-latip' => 'Firmware',
                 ],
             ],
@@ -167,7 +167,7 @@ class ProjectSeeder extends Seeder
                 'is_featured' => false,
                 'sort_order' => 6,
                 'team' => [
-                    'dimas-saputra' => 'Rangkaian dan pengujian',
+                    'mufidah-kholilah-putri' => 'Analisis sistem',
                     'hari-poppy-latip' => 'Firmware',
                 ],
             ],
@@ -188,7 +188,7 @@ class ProjectSeeder extends Seeder
                 'is_featured' => false,
                 'sort_order' => 7,
                 'team' => [
-                    'dimas-saputra' => 'Rangkaian',
+                    'mufidah-kholilah-putri' => 'Analisis sistem',
                     'hari-poppy-latip' => 'Firmware',
                 ],
             ],

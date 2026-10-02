@@ -8,16 +8,33 @@ use Illuminate\Database\Seeder;
 class MemberSeeder extends Seeder
 {
     /**
-     * Seed the four Tekara members.
-     *
-     * Data anggota 2 sampai 4 masih contoh. Ganti nama, peran, dan isi CV
-     * di sini lalu jalankan `php artisan db:seed --class=MemberSeeder`.
+     * Seed the four current Tekara members.
      */
     public function run(): void
     {
-        foreach ($this->members() as $member) {
-            Member::updateOrCreate(['slug' => $member['slug']], $member);
+        foreach ($this->members() as $memberData) {
+            $member = Member::query()->firstOrNew(['slug' => $memberData['slug']]);
+
+            if ($member->exists === false) {
+                $member = Member::query()
+                    ->whereIn('slug', $this->legacySlugsFor($memberData['slug']))
+                    ->first() ?? $member;
+            }
+
+            $member->fill($memberData)->save();
         }
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function legacySlugsFor(string $slug): array
+    {
+        return [
+            'yusuf-sardani' => ['rizky-pratama'],
+            'zaskia-nabila' => ['nadia-putri'],
+            'mufidah-kholilah-putri' => ['dimas-saputra'],
+        ][$slug] ?? [];
     }
 
     /**
@@ -29,12 +46,12 @@ class MemberSeeder extends Seeder
             [
                 'name' => 'Hari Poppy Latip',
                 'slug' => 'hari-poppy-latip',
-                'role' => 'Web & IoT Developer',
+                'role' => 'Lead Full-Stack & IoT Hardware Engineer',
+                'email' => 'haristheking1@gmail.com',
+                'phone' => '081321897866',
                 'headline' => 'Membangun sistem yang menghubungkan alat di lapangan dengan dashboard di browser.',
                 'summary' => 'Developer Laravel dan PHP yang juga menulis firmware ESP32. Terbiasa mengerjakan satu sistem dari ujung ke ujung: sensor sidik jari dan LCD di alat, API yang menerima datanya, sampai halaman laporan yang dipakai guru dan admin sekolah.',
                 'location' => 'Samarinda, Kalimantan Timur',
-                'email' => null,
-                'phone' => null,
                 'links' => [
                     ['label' => 'GitHub', 'url' => 'https://github.com/'],
                     ['label' => 'LinkedIn', 'url' => 'https://www.linkedin.com/'],
@@ -65,86 +82,79 @@ class MemberSeeder extends Seeder
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Rizky Pratama',
-                'slug' => 'rizky-pratama',
-                'role' => 'Backend Developer',
-                'headline' => 'Merancang API dan database yang rapi supaya sistem mudah dikembangkan.',
-                'summary' => 'Fokus pada sisi server: struktur database, API untuk perangkat IoT, otentikasi, dan laporan. Senang membuat kode yang mudah dibaca rekan satu tim.',
+                'name' => 'Yusuf Sardani',
+                'slug' => 'yusuf-sardani',
+                'role' => 'Administrative & Documentation Specialist',
+                'headline' => 'Mengelola seluruh administrasi, perizinan, dan dokumen kontrak proyek agar berjalan lancar.',
+                'summary' => 'Menangani urusan administrasi, penyusunan dokumen kerja sama, surat-menyurat, serta arsip data proyek. Memastikan setiap kesepakatan dan kebutuhan administratif tertata rapi secara hukum dan terstruktur untuk mendukung kelancaran operasional tim.',
                 'location' => 'Samarinda, Kalimantan Timur',
                 'email' => null,
                 'phone' => null,
                 'links' => [],
                 'skills' => [
-                    ['group' => 'Backend', 'items' => ['Laravel', 'PHP', 'MySQL', 'REST API']],
-                    ['group' => 'Tools', 'items' => ['Git', 'Postman', 'Linux server']],
+                    ['group' => 'Administrasi', 'items' => ['Penyusunan Kontrak', 'Pembuatan Surat Resmi', 'Kearsipan Dokumen', 'Manajemen Arsip']],
                 ],
                 'experiences' => [
                     [
-                        'title' => 'Backend Developer',
+                        'title' => 'Administrative & Documentation Specialist',
                         'place' => 'Tekara',
                         'period' => '2026 - sekarang',
-                        'description' => 'Contoh isi. Tuliskan tanggung jawab dan hasil kerja di sini.',
+                        'description' => 'Mengelola administrasi, dokumen kerja sama, surat-menyurat, dan arsip proyek untuk mendukung operasional tim.',
                     ],
                 ],
-                'educations' => [
-                    ['school' => 'Nama kampus atau sekolah', 'major' => 'Jurusan', 'period' => 'Tahun'],
-                ],
+                'educations' => [],
                 'certifications' => [],
                 'sort_order' => 2,
             ],
             [
-                'name' => 'Nadia Putri',
-                'slug' => 'nadia-putri',
-                'role' => 'UI/UX & Frontend Developer',
-                'headline' => 'Membuat tampilan yang tenang, jelas, dan mudah dipakai semua umur.',
-                'summary' => 'Mengubah kebutuhan pengguna menjadi alur dan tampilan yang sederhana. Menulis antarmuka dengan Blade dan Tailwind CSS serta memastikan tampilannya nyaman di ponsel.',
+                'name' => 'Zaskia Nabila',
+                'slug' => 'zaskia-nabila',
+                'role' => 'Business Development & Client Relations Manager',
+                'headline' => 'Menghubungkan kebutuhan klien dengan tim untuk memastikan kerja sama berjalan sukses.',
+                'summary' => 'Berperan sebagai garda depan yang menemui klien, menggali kebutuhan proyek, serta merundingkan penawaran kerja sama. Fokus membangun hubungan baik dan memastikan visi klien tersampaikan dengan jelas kepada tim teknis.',
                 'location' => 'Samarinda, Kalimantan Timur',
                 'email' => null,
                 'phone' => null,
                 'links' => [],
                 'skills' => [
-                    ['group' => 'Desain', 'items' => ['Figma', 'UI/UX', 'Design system']],
-                    ['group' => 'Frontend', 'items' => ['Tailwind CSS', 'JavaScript', 'Blade']],
+                    ['group' => 'Bisnis & Klien', 'items' => ['Negosiasi', 'Presentasi / Pitching', 'Manajemen Hubungan Klien', 'Riset Pasar']],
+                    ['group' => 'Komunikasi', 'items' => ['Komunikasi Publik', 'Penawaran Kerja Sama', 'Analisis Kebutuhan Klien']],
                 ],
                 'experiences' => [
                     [
-                        'title' => 'UI/UX & Frontend Developer',
+                        'title' => 'Business Development & Client Relations Manager',
                         'place' => 'Tekara',
                         'period' => '2026 - sekarang',
-                        'description' => 'Contoh isi. Tuliskan tanggung jawab dan hasil kerja di sini.',
+                        'description' => 'Menemui klien, menggali kebutuhan proyek, menyusun penawaran kerja sama, dan menyampaikan kebutuhan klien kepada tim teknis.',
                     ],
                 ],
-                'educations' => [
-                    ['school' => 'Nama kampus atau sekolah', 'major' => 'Jurusan', 'period' => 'Tahun'],
-                ],
+                'educations' => [],
                 'certifications' => [],
                 'sort_order' => 3,
             ],
             [
-                'name' => 'Dimas Saputra',
-                'slug' => 'dimas-saputra',
-                'role' => 'IoT & Hardware Engineer',
-                'headline' => 'Merakit dan memprogram alat yang tetap bekerja di kondisi nyata.',
-                'summary' => 'Menangani rangkaian, pemilihan sensor, dan firmware mikrokontroler. Terbiasa menguji alat di lapangan dan mencari penyebab masalah dari wiring sampai protokol komunikasi.',
+                'name' => 'Mufidah Kholilah Putri',
+                'slug' => 'mufidah-kholilah-putri',
+                'role' => 'Project Manager & Systems Analyst',
+                'headline' => 'Menyusun alur proyek dari hasil wawancara klien dan menyelaraskan kerja tim.',
+                'summary' => 'Menerjemahkan keinginan dan hasil diskusi klien menjadi cetak biru proyek yang terstruktur. Bertanggung jawab mengatur timeline pengerjaan serta mengoordinasikan sisi teknis dan administratif agar proyek selesai tepat sasaran.',
                 'location' => 'Samarinda, Kalimantan Timur',
                 'email' => null,
                 'phone' => null,
                 'links' => [],
                 'skills' => [
-                    ['group' => 'Hardware', 'items' => ['ESP32', 'Desain rangkaian', 'Sensor dan aktuator']],
-                    ['group' => 'Firmware', 'items' => ['C++ Arduino', 'PlatformIO', 'MQTT']],
+                    ['group' => 'Manajemen Proyek', 'items' => ['Penjadwalan Proyek', 'Manajemen Tim', 'Quality Control', 'Pelacakan Tugas']],
+                    ['group' => 'Analisis', 'items' => ['Analisis Sistem', 'Pembuatan Alur Kerja (Workflow)', 'Dokumentasi Teknis', 'Wawancara Klien']],
                 ],
                 'experiences' => [
                     [
-                        'title' => 'IoT & Hardware Engineer',
+                        'title' => 'Project Manager & Systems Analyst',
                         'place' => 'Tekara',
                         'period' => '2026 - sekarang',
-                        'description' => 'Contoh isi. Tuliskan tanggung jawab dan hasil kerja di sini.',
+                        'description' => 'Menyusun alur kerja dari hasil wawancara klien, mengatur timeline, dan mengoordinasikan tim teknis serta administratif.',
                     ],
                 ],
-                'educations' => [
-                    ['school' => 'Nama kampus atau sekolah', 'major' => 'Jurusan', 'period' => 'Tahun'],
-                ],
+                'educations' => [],
                 'certifications' => [],
                 'sort_order' => 4,
             ],
