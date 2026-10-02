@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    --font-display:
+        var(--font-sora), var(--font-inter), ui-sans-serif, system-ui,
+        sans-serif;
+
+    --color-ink: #1b2029;
+    --color-ink-soft: #3d4553;
+    --color-muted: #667085;
+    --color-line: #e4e7ec;
+    --color-canvas: #f6f7f9;
+    --color-night: #12161d;
+    --color-night-soft: #1b212b;
+
+    --color-brand: #1d5bff;
+    --color-brand-deep: #1530d8;
+    --color-brand-sky: #12b4f7;
+    --color-brand-tint: #eaf0ff;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+    }
+
+    body {
+        @apply bg-canvas font-sans text-ink antialiased;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand;
+    }
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .print-flat {
+        box-shadow: none !important;
+        border: 0 !important;
+    }
+}
+
+@layer components {
+    .form-label {
+        @apply block text-sm font-medium text-ink;
+    }
+
+    .form-input {
+        @apply mt-1.5 block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink shadow-xs transition placeholder:text-muted/70 focus:border-brand focus:ring-2 focus:ring-brand/15 focus:outline-none;
+    }
+
+    .form-hint {
+        @apply mt-1.5 text-xs text-muted;
+    }
+
+    .form-error {
+        @apply mt-1.5 text-xs font-medium text-red-600;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition disabled:opacity-50 bg-brand text-white hover:bg-brand-deep;
+    }
+
+    .btn-dark {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition disabled:opacity-50 bg-ink text-white hover:bg-night;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition disabled:opacity-50 border border-line bg-white text-ink hover:border-ink;
+    }
+
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition disabled:opacity-50 border border-red-200 bg-white text-red-700 hover:border-red-400 hover:bg-red-50;
+    }
+
+    .panel-card {
+        @apply rounded-2xl border border-line bg-white;
+    }
+
+    .post-body {
+        @apply text-lg leading-relaxed text-ink-soft;
+    }
+
+    .post-body > * + * {
+        @apply mt-6;
+    }
+
+    .post-body h2 {
+        @apply mt-12 font-display text-2xl font-bold tracking-tight text-ink;
+    }
+
+    .post-body h3 {
+        @apply mt-10 font-display text-xl font-semibold text-ink;
+    }
+
+    .post-body h4 {
+        @apply mt-8 font-sans text-base font-semibold text-ink;
+    }
+
+    .post-body strong {
+        @apply font-semibold text-ink;
+    }
+
+    .post-body a {
+        @apply font-medium text-brand underline decoration-brand/40 underline-offset-4 transition hover:decoration-brand;
+    }
+
+    .post-body ul {
+        @apply space-y-3;
+    }
+
+    .post-body ol {
+        @apply list-decimal space-y-3 pl-6;
+    }
+
+    .post-body blockquote {
+        @apply border-l-4 border-brand/30 pl-6 text-ink italic;
+    }
+
+    .post-body code {
+        @apply rounded bg-canvas px-1.5 py-0.5 font-mono text-base text-ink;
+    }
+
+    .post-body pre {
+        @apply overflow-x-auto rounded-xl bg-night p-5 font-mono text-sm leading-relaxed text-white/90;
+    }
+
+    .post-body pre code {
+        @apply bg-transparent p-0 text-inherit;
+    }
+
+    .post-body img {
+        @apply rounded-2xl border border-line;
+    }
+
+    .post-body hr {
+        @apply border-line;
+    }
+
+    .post-body table {
+        @apply w-full border-collapse text-left text-base;
+    }
+
+    .post-body th {
+        @apply border-b border-line pb-2 text-sm font-semibold text-ink;
+    }
+
+    .post-body td {
+        @apply border-b border-line py-2 text-sm;
+    }
+}
