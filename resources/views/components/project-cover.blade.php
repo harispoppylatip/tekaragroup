@@ -1,14 +1,22 @@
-@props(['project'])
+@props(['project', 'fit' => 'cover'])
 
 @php
     $isWeb = $project->categories->contains(\App\ProjectCategory::Website);
     $isIot = $project->categories->contains(\App\ProjectCategory::Iot);
     $background = $isWeb ? 'bg-night' : 'bg-linear-to-br from-brand-deep via-brand to-brand-sky';
+    $hasCover = (bool) $project->cover_image;
+    // "natural" lets the frame follow the image ratio so nothing is cropped.
+    $naturalFit = $hasCover && $fit === 'natural';
+    $frameClass = $naturalFit ? 'relative overflow-hidden bg-canvas' : 'relative aspect-[16/10] overflow-hidden';
 @endphp
 
-<div {{ $attributes->merge(['class' => 'relative aspect-[16/10] overflow-hidden']) }}>
-    @if ($project->cover_image)
-        <img src="{{ asset('storage/'.$project->cover_image) }}" alt="Tampilan {{ $project->title }}" class="size-full object-cover" loading="lazy">
+<div {{ $attributes->merge(['class' => $frameClass]) }}>
+    @if ($hasCover)
+        <img src="{{ asset('storage/'.$project->cover_image) }}" alt="Tampilan {{ $project->title }}"
+            @class([
+                'size-full object-cover' => ! $naturalFit,
+                'block h-auto w-full' => $naturalFit,            ])
+            loading="lazy">
     @else
         <div class="absolute inset-0 {{ $background }}" aria-hidden="true">
             <svg class="absolute -right-10 -bottom-12 h-[85%] text-white/[0.06]" viewBox="0 0 220 220" fill="currentColor">

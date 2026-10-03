@@ -43,7 +43,7 @@
 
             <section class="panel-card p-6">
                 <h2 class="font-display text-lg font-semibold text-ink">Gambar sampul</h2>
-                <p class="mt-1 text-sm text-ink-soft">JPG, PNG, atau WebP, maksimal 4 MB.</p>
+                <p class="mt-1 text-sm text-ink-soft">JPG, PNG, atau WebP, maksimal 4 MB. Ukuran ideal 1600 × 1000 px (rasio 16:10) agar pas di kartu berita.</p>
 
                 @if ($post->cover_image)
                     <div class="mt-5 flex flex-wrap items-center gap-4">

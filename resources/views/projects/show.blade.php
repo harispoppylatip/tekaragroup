@@ -11,7 +11,7 @@
             <p class="mt-5 text-lg leading-relaxed text-ink-soft">{{ $project->summary }}</p>
         </header>
 
-        <x-project-cover :project="$project" class="mt-10 rounded-3xl" />
+        <x-project-cover :project="$project" fit="natural" class="mt-10 rounded-3xl" />
 
         <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_300px]">
             <div class="space-y-12">

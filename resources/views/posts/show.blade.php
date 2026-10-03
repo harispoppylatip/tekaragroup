@@ -22,7 +22,7 @@
 
         @if ($post->cover_image)
             <div class="mx-auto max-w-4xl px-4 pt-10 sm:px-6">
-                <img src="{{ asset('storage/'.$post->cover_image) }}" alt="Sampul {{ $post->title }}" class="aspect-[16/9] w-full rounded-2xl border border-line object-cover">
+                <img src="{{ asset('storage/'.$post->cover_image) }}" alt="Sampul {{ $post->title }}" class="block h-auto w-full rounded-2xl border border-line">
             </div>
         @endif
 
